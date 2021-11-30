@@ -1,0 +1,12 @@
+.rowdiv{
+    display: flex;
+}
+.basediv{
+    display: flex;
+    flex-direction: column;
+}
+.block{
+    width: 16px;
+    height: 16px;
+    background-color: chocolate;
+}
