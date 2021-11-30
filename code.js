@@ -25,8 +25,11 @@ function creategrid(size){
             div.classList.add('block');
             div.style.background = 'rgb(255,255,255)';
             div.addEventListener('mouseover', ()=>{
-                let Bcol = div.style.background.slice(4,8);
-                let col = +Bcol.slice(0,Bcol.lastIndexOf(','));
+                let col = div.style.background.slice(
+                    div.style.background.indexOf('(')+1,
+                    div.style.background.indexOf(',')
+                    );
+
                 if(col>=51){
                     col-=51;
                     div.style.background = `rgb(${col},${col},${col})`;
