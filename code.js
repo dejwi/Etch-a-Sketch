@@ -1,19 +1,43 @@
-let basediv = document.createElement('div');
-basediv.classList.add('basediv');
+let btn = document.querySelector('#changesize');
+btn.addEventListener('click',()=> {
+    let usrsize;
+    do{
+        usrsize = prompt('Enter desired size | max 100');
+    }while(usrsize>100 && !Number.isInteger(usrsize))
+    creategrid(usrsize);
+});
 
-let n = 16;
+function creategrid(size){
+    let basedivdel = document.querySelector('#basediv');
+    if(basedivdel)
+        basedivdel.remove();
+    let basediv = document.createElement('div');
+    basediv.classList.add('basediv');
+    basediv.id = 'basediv';
 
+    for (let i = 0; i < size; i++) {
+        let rowdiv = document.createElement('div');
+        rowdiv.classList.add('rowdiv');
 
-for (let i = 0; i < n; i++) {
-    let rowdiv = document.createElement('div');
-    rowdiv.classList.add('rowdiv');
-    
-    for (let i = 0; i < n; i++) {
-        let div = document.createElement('div');
-        div.classList.add('block');
-        rowdiv.appendChild(div);
+        for (let i = 0; i < size; i++) {
+            let div = document.createElement('div');
+            
+            div.classList.add('block');
+            div.style.background = 'rgb(255,255,255)';
+            div.addEventListener('mouseover', ()=>{
+                let Bcol = div.style.background.slice(4,8);
+                let col = +Bcol.slice(0,Bcol.lastIndexOf(','));
+                if(col>=51){
+                    col-=51;
+                    div.style.background = `rgb(${col},${col},${col})`;
+                }
+            });
+            rowdiv.appendChild(div);
+        }
+        basediv.appendChild(rowdiv);
     }
-
-    basediv.appendChild(rowdiv);
+    document.body.appendChild(basediv);
 }
-document.body.appendChild(basediv);
+
+creategrid(16);
+
